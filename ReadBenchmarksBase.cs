@@ -4,7 +4,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace ArrayIteration
 {
-    public abstract class BenchmarksBase
+    public abstract class ReadBenchmarksBase
     {
         const int Seed = 42;
         const int MaxValue = 100;
@@ -20,7 +20,7 @@ namespace ArrayIteration
         public void GlobalSetup()
         {
             // ReSharper disable once HeapView.ObjectAllocation.Evident
-            _array = new int[Count];
+            _array = Utils.AllocateArray<int>(Count);
 
             // ReSharper disable once HeapView.ObjectAllocation.Evident
             var random = new Random(Seed);

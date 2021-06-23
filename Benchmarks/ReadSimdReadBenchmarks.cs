@@ -2,7 +2,7 @@
 
 namespace ArrayIteration
 {
-    public class SimdBenchmarks : BenchmarksBase
+    public class ReadSimdReadBenchmarks : ReadBenchmarksBase
     {
 
         [Benchmark(Baseline = true)]
