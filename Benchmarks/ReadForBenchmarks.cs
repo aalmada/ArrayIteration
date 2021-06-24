@@ -2,7 +2,7 @@
 
 namespace ArrayIteration
 {
-    public class ReadForReadBenchmarks : ReadBenchmarksBase
+    public class ReadForBenchmarks : ReadBenchmarksBase
     {
         [Benchmark(Baseline = true)]
         public int Foreach()
