@@ -3,7 +3,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace ArrayIteration
 {
-    public class ReadListReadBenchmarks : ReadBenchmarksBase
+    public class ReadListBenchmarks : ReadBenchmarksBase
     {
 
         [Benchmark(Baseline = true)]
