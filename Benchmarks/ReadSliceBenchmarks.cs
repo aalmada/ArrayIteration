@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BenchmarkDotNet.Attributes;
 
 namespace ArrayIteration
@@ -15,7 +16,7 @@ namespace ArrayIteration
             => Sum.For(_array, 0, _array.Length);
 
         [Benchmark]
-        public int Span_Foreach()
+        public int Span_ForEach()
             => Sum.ForEach(_array.AsSpan());
         
         [Benchmark]
@@ -25,6 +26,10 @@ namespace ArrayIteration
         [Benchmark]
         public int ArraySegment_ForEach()
             => Sum.ForEach(_arraySegment);
+        
+        [Benchmark]
+        public int ArraySegment_Linq()
+            => _arraySegment.Sum();
         
         [Benchmark]
         public int ArraySegment_ArrayFor()

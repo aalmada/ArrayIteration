@@ -14,9 +14,9 @@ namespace ArrayIteration
             var config = DefaultConfig.Instance
                 .WithSummaryStyle(SummaryStyle.Default.WithRatioStyle(RatioStyle.Trend))
                 .AddDiagnoser(MemoryDiagnoser.Default)
-                .AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(
-                    printSource: true,
-                    exportGithubMarkdown: true)))
+                // .AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(
+                //     printSource: true,
+                //     exportGithubMarkdown: true)))
                 .AddExporter(MarkdownExporter.GitHub);
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, config);
         }
