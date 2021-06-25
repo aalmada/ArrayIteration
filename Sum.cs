@@ -59,6 +59,25 @@ namespace ArrayIteration
             return sum;
         }
         
+        public static int For(ArraySegment<int> source)
+        {
+            var sum = 0;
+            // ReSharper disable once ForCanBeConvertedToForeach
+            // ReSharper disable once LoopCanBeConvertedToQuery
+            for (var index = 0; index < source.Count; index++)
+                sum += source[index];
+            return sum;        
+        }  
+        
+        public static int ForEach(ArraySegment<int> source)
+        {
+            var sum = 0;
+            // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
+            foreach (var item in source)
+                sum += item;
+            return sum;
+        }
+        
         public static int For(List<int> source)
         {
             var sum = 0;
