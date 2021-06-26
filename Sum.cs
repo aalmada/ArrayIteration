@@ -118,5 +118,61 @@ namespace ArrayIteration
                 sum += item;
             return sum;
         }
+        
+        public static int Sum2(int[] source)
+        {
+            var sum0 = 0;
+            var sum1 = 0;
+            for (var index = 0; index < source.Length - 2; index += 2)
+            {
+                var item0 = source[index];
+                var item1 = source[index + 1];
+                sum0 += item0;
+                sum1 += item1;
+            }
+            // ReSharper disable once InvertIf
+            if ((source.Length & 0x01) != 0)
+            {
+                var item = source[^1];
+                sum0 += item;
+            }
+            return sum0 + sum1;
+        }
+
+        // ReSharper disable once ParameterTypeCanBeEnumerable.Global
+        public static int Predicate(int[] source, Func<int, bool> predicate)
+        {
+            var sum = 0;
+            // ReSharper disable once LoopCanBeConvertedToQuery
+            foreach (var item in source)
+            {
+                if (predicate(item))
+                    sum += item;
+            }
+            return sum;
+        }
+
+        public static int Predicate2(int[] source, Func<int, bool> predicate)
+        {
+            var sum0 = 0;
+            var sum1 = 0;
+            for (var index = 0; index < source.Length - 2; index += 2)
+            {
+                var item0 = source[index];
+                var item1 = source[index + 1];
+                if (predicate(item0))
+                    sum0 += item0;
+                if (predicate(item1))
+                    sum1 += item1;
+            }
+            // ReSharper disable once InvertIf
+            if ((source.Length & 0x01) != 0)
+            {
+                var item = source[^1];
+                if (predicate(source[item]))
+                    sum0 += item;
+            }
+            return sum0 + sum1;
+        }
     }
 }
