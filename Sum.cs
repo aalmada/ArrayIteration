@@ -119,11 +119,11 @@ namespace ArrayIteration
             return sum;
         }
         
-        public static int Sum2(int[] source)
+        public static int SumAdamczewski(int[] source)
         {
             var sum0 = 0;
             var sum1 = 0;
-            for (var index = 0; index < source.Length - 2; index += 2)
+            for (var index = 0; index < source.Length - 1; index += 2)
             {
                 var item0 = source[index];
                 var item1 = source[index + 1];
@@ -131,7 +131,7 @@ namespace ArrayIteration
                 sum1 += item1;
             }
             // ReSharper disable once InvertIf
-            if ((source.Length & 0x01) != 0)
+            if (source.Length.IsOdd())
             {
                 var item = source[^1];
                 sum0 += item;
@@ -140,7 +140,7 @@ namespace ArrayIteration
         }
 
         // ReSharper disable once ParameterTypeCanBeEnumerable.Global
-        public static int Predicate(int[] source, Func<int, bool> predicate)
+        public static int SumPredicate(int[] source, Func<int, bool> predicate)
         {
             var sum = 0;
             // ReSharper disable once LoopCanBeConvertedToQuery
@@ -152,25 +152,32 @@ namespace ArrayIteration
             return sum;
         }
 
-        public static int Predicate2(int[] source, Func<int, bool> predicate)
+        // ReSharper disable once ParameterTypeCanBeEnumerable.Global
+        public static int SumPredicateNoBranches(int[] source, Func<int, bool> predicate)
+        {
+            var sum = 0;
+            // ReSharper disable once LoopCanBeConvertedToQuery
+            foreach (var item in source)
+                sum += predicate(item).AsByte() * item;
+            return sum;
+        }
+        
+        public static int SumPredicateAdamczewski(int[] source, Func<int, bool> predicate)
         {
             var sum0 = 0;
             var sum1 = 0;
-            for (var index = 0; index < source.Length - 2; index += 2)
+            for (var index = 0; index < source.Length - 1; index += 2)
             {
                 var item0 = source[index];
                 var item1 = source[index + 1];
-                if (predicate(item0))
-                    sum0 += item0;
-                if (predicate(item1))
-                    sum1 += item1;
+                sum0 += predicate(item0).AsByte() * item0;
+                sum1 += predicate(item1).AsByte() * item1;
             }
             // ReSharper disable once InvertIf
-            if ((source.Length & 0x01) != 0)
+            if (source.Length.IsOdd())
             {
                 var item = source[^1];
-                if (predicate(source[item]))
-                    sum0 += item;
+                sum0 += predicate(item).AsByte() * item;
             }
             return sum0 + sum1;
         }
